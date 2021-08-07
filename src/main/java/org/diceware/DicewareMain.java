@@ -7,7 +7,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class DicewareMain {
     public static void main(String[] args) {
@@ -15,6 +14,8 @@ public class DicewareMain {
         int w = 0;   // number of altered words
         String language = "en";
         String passType = "w";
+        String delimiter = " ";
+        boolean capitalised = false;
         boolean v = false;
 
         try {
@@ -23,6 +24,8 @@ public class DicewareMain {
             options.addOption(new Option("n", "number", true, "number of words/characters"));
             options.addOption(new Option("i", "inserts", true, "number of altered words"));
             options.addOption(new Option("p", "password", true, "type of password"));
+            options.addOption(new Option("d", "delimiter", true, "character for a delimiter"));
+            options.addOption(new Option("c", "capitalised", false, "first letters are capitalised"));
             options.addOption(new Option("v", "verbose", false, "print parameters of random generator"));
             CommandLineParser commandLineParser = new DefaultParser();
             CommandLine cmd = commandLineParser.parse(options, args);
@@ -31,6 +34,8 @@ public class DicewareMain {
             if (cmd.hasOption("n")) n = Integer.parseInt(cmd.getOptionValue("n"));
             if (cmd.hasOption("l")) language = cmd.getOptionValue("language");
             if (cmd.hasOption("p")) passType = cmd.getOptionValue("p");
+            if (cmd.hasOption("d")) delimiter = cmd.getOptionValue("d");
+            if (cmd.hasOption("c")) capitalised = true;
             if (cmd.hasOption("v")) v = true;
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
@@ -41,7 +46,7 @@ public class DicewareMain {
         }
 
         // Object
-        DiceWare dw = new DiceWare(language);
+        DiceWare dw = new DiceWare(language, delimiter, capitalised);
 
         if (v) {
             dw.printAboutRandom();
@@ -50,8 +55,7 @@ public class DicewareMain {
 
         if (List.of("words", "word", "w").contains(passType)) {
             String password = dw.complex(n, w);
-            System.out.printf("Password:%n    %s%n", password);
-            System.out.printf("    %s%n%n", DiceWare.firstCapitalLetters(password, ""));
+            System.out.printf("Password:%n    %s%n%n", password);
         } else if (List.of("alphanumeric", "alphanum", "a").contains(passType)) {
             System.out.printf("Password:%n    %s%n%n", dw.alphanumeric(n));
         } else if (List.of("characters", "character", "chars", "char", "c").contains(passType)) {
@@ -64,10 +68,12 @@ public class DicewareMain {
     private static void printHelp() {
         System.out.println("Usage: java -jar DiceWareProject.jar [OPTIONS]");
         System.out.println();
-        System.out.println("-n, --number     number of words in the phrase, default 6");
-        System.out.println("-i, --inserts    number of words altered with special characters, default 0");
-        System.out.println("-l, --language   specified a language (en or pl), default en");
-        System.out.println("-p, --password   type of password: words (w), alphanumeric (a), or characters (c)");
-        System.out.println("-v, --verbose    print parameters of the random generator");
+        System.out.println("-n, --number        number of words in the phrase, default 6");
+        System.out.println("-i, --inserts       number of words altered with special characters, default 0");
+        System.out.println("-l, --language      specified a language (en or pl), default en");
+        System.out.println("-p, --password      type of password: words (w), alphanumeric (a), or characters (c)");
+        System.out.println("-d, --delimiter     character for a delimiter, e.g. \" \"");
+        System.out.println("-c, --capitalised   words have capital letters");
+        System.out.println("-v, --verbose       print parameters of the random generator");
     }
 }

@@ -39,6 +39,7 @@ public class DiceWare {
         check();
         return codes(n).stream()
             .map(diceWareList::get)
+            .map(e -> capitals ? e.substring(0, 1).toUpperCase() + e.substring(1) : e)
             .collect(Collectors.joining(delimiter));
     }
 
@@ -46,6 +47,7 @@ public class DiceWare {
         check();
         ArrayList<String> words = codes(n).stream()
             .map(diceWareList::get)
+            .map(e -> capitals ? e.substring(0, 1).toUpperCase() + e.substring(1) : e)
             .collect(Collectors.toCollection(ArrayList::new));
         return insertSpecialCharacters(words, w);
     }
@@ -123,7 +125,7 @@ public class DiceWare {
                 w--;
             }
         }
-        return String.join(" ", output);
+        return String.join(delimiter, output);
     }
 
     private void populateWordList() throws FileNotFoundException {

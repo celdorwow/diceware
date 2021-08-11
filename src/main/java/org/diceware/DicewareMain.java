@@ -66,7 +66,7 @@ public class DicewareMain {
     }
 
     private static void printHelp() {
-        System.out.println("Usage: java -jar DiceWareProject.jar [OPTIONS]");
+        System.out.println("Usage: java -jar diceware.jar [OPTIONS]");
         System.out.println();
         System.out.println("-n, --number        number of words in the phrase, default 6");
         System.out.println("-i, --inserts       number of words altered with special characters, default 0");

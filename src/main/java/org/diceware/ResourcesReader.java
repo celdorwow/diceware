@@ -1,4 +1,10 @@
 package org.diceware;
+/** Reads files from the Resources folder and returns an object with access to Stream\<T\>
+ * @author Zbigniew Koziel
+ * @version 0.1-beta
+ *
+ * @param type The type of a class this is used in
+ */
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

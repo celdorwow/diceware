@@ -1,3 +1,10 @@
+/** Diceware method to generate secure passwords
+ *
+ * @author Zbigniew Koziel
+ * @version 0.1.0-beta
+ * @since 2021-08-12
+ * @See <a href="https://theworld.com/~reinhold/diceware.html">Diceware Method</a> and <a href="https://theworld.com/~reinhold/diceware.html">Diceware FAQ</a>
+ */
 package org.diceware;
 
 import java.io.BufferedReader;
@@ -135,8 +142,7 @@ public class DiceWare {
             .forEach(line -> {
                 if (pattern.matcher(line).matches()) {
                     pattern.matcher(line).results().forEach(e -> {
-                        String[] array = new String[] {e.group(1), e.group(2)};
-                        this.diceWareList.put(array[0], array[1]);
+                        this.diceWareList.put(e.group(1), e.group(2));
                     });
                 }
             });

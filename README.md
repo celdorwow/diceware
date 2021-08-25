@@ -6,6 +6,8 @@ Java version of the [Diceware][1] method for generating secure passwords.
 
 The application simulates generating a secure passwords using the [Diceware][1] method. However, how _secure_ the password is also depends on a number of words in a password; essentially the more words the more secure passphrase. For certain applications, there is a suggested _minimum_ # of words. There are circumstances where a long passphrase is not recommended. Please consult [this website][1] as well as the available [FAQ][2].
 
+As a side note, [Password strength test][7] is one of the tools to have a rough idea about how strong a passphrase is. While the _application is neither perfect nor foolproof_, as describer states, it still points out potential weak parts of a password.
+
 **Installation**
 
 In order to compile the project, the OS must have an access to a a java development kit, e.g. [OpenJDK][5]. In order to create a self-contained and executable `jar` file, it is also required to have the access to  `mvn` command, which is part of the [Maven][4] project. Once both a java JDK and [Maven][4] are available and the current folder is a folder of the project, the executable self-contained `jar` file can be created.
@@ -61,3 +63,4 @@ Two outcomes are possible, either **Good signature** or a warning **The validity
 [4]: https://maven.apache.org/index.html
 [5]: https://openjdk.java.net/
 [6]: https://commons.apache.org/proper/commons-cli/index.html
+[7]: https://www.uic.edu/apps/strong-password/
